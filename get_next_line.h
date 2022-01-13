@@ -16,17 +16,16 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_strcpy_n(char *dest, char *src);
-char	*ft_find_n(char *s);
-char	*ft_first_save(void);
-
-
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
+int		ft_find_n(char *s);
+char	*ft_first_read(char *s);
 
 #endif

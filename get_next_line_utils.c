@@ -33,34 +33,46 @@ char	*ft_strcpy_n(char *dest, char *src)
 		i++;
 	}
 	if (src[i] == '\n')
-		dest[i++] = '\n';
+	{
+		dest[i] = '\n';
+		i++;
+	}
 	dest[i] = '\0';
 	return (dest);
 }
 
-char	*ft_find_n(char *s)
+int	ft_find_n(char *s)
 {
 	int	i;
 
 	i = 0;
+	if(!s)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == '\n')
-			return ((char*)&s[i]);
+			return (1);
 		i++;
 	}
-	return (NULL);
+	return (0);
 }
 
-char	*ft_first_save(void)
+char	*ft_first_read(char *s)
 {
-	char	*d;
+	int		i;
+	char	*dest;
 
-	d = malloc(sizeof(char) * 1);
-	if (d == NULL)
+	dest = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!dest)
 		return (NULL);
-	d = "";
-	return (d);
+	i = 0;
+	while (s[i])
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -72,7 +84,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (s1 == NULL)
-		s1 = ft_first_save();
+		s1 = ft_first_read("");
 	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (dest == NULL)
 		return (NULL);
@@ -83,8 +95,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	while (s2[j])
 	{
-		dest[i+j] = s2[j];
+		dest[i] = s2[j];
 		i++;
+		j++;
 	}
 	dest[i] = '\0';
 	free(s1);
