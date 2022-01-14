@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:52:25 by vbauer            #+#    #+#             */
-/*   Updated: 2022/01/14 18:54:26 by vbauer           ###   ########.fr       */
+/*   Updated: 2022/01/14 19:21:23 by vbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,51 +85,42 @@ char	*ft_after__n(char *save)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	*save[1024];
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0) || fd > 1024)
 		return (NULL);
-	save = ft_read(fd, save);
-	if (save == NULL)
+	save[fd] = ft_read(fd, save[fd]);
+	if (save[fd] == NULL)
 		return (NULL);
-	if (save[0] == '\0')
+	if (save[fd][0] == '\0')
 	{
-		free(save);
-		save = NULL;
+		free(save[fd]);
+		save[fd] = NULL;
 		return (NULL);
 	}
-	line = ft_before_n(save);
-	save = ft_after__n(save);
+	line = ft_before_n(save[fd]);
+	save[fd] = ft_after__n(save[fd]);
 	return (line);
 }
+/*
+int	main(void)
+{
+	int fd;
+	int fd1;
 
-// int main(void)
-// {
-//	   int fd;
-//	   int i = 0;
-//	   ////char    *line;
+	fd = open("text.txt", O_RDONLY);
+	fd1 = open("text2.txt", O_RDONLY);
 
-//	   fd = open("input.txt", O_RDONLY);
-//	   // if (fd == -1)
-//	   //			  return (1);		 // failed
-//	   while (i++ < 10)
-//	   {
-//	   //// line = get_next_line(fd);
-//	   //// printf("GNT - main - Ligne = %s\n", line);
-//	   ////free(line);
-//		   printf("******* GNT1 ********\n");
-//		   printf("GNT1 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT2 ********\n");
-//	   // printf("GNT2 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT3 ********\n");
-//	   // printf("GNT3 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT4 ********\n");
-//	   // printf("GNT4 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT5 ********\n");
-//	   // printf("GNT5 - main - Ligne = %s", get_next_line(fd));
-//	   // if (close(fd) == -1)
-//	   //	  return (1);		 // failed
-//	   }
-//	   return (0);
-// }
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd1));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd1));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd1));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd1));
+
+	return (0);
+
+}*/
