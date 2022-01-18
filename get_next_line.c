@@ -6,7 +6,7 @@
 /*   By: vbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:52:25 by vbauer            #+#    #+#             */
-/*   Updated: 2022/01/14 18:54:26 by vbauer           ###   ########.fr       */
+/*   Updated: 2022/01/17 15:51:20 by vbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,9 @@ char	*get_next_line(int fd)
 	static char	*save;
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0) || (read(fd, NULL, 0) == -1))
 		return (NULL);
 	save = ft_read(fd, save);
-	if (save == NULL)
-		return (NULL);
 	if (save[0] == '\0')
 	{
 		free(save);
@@ -115,9 +113,6 @@ char	*get_next_line(int fd)
 //	   //			  return (1);		 // failed
 //	   while (i++ < 10)
 //	   {
-//	   //// line = get_next_line(fd);
-//	   //// printf("GNT - main - Ligne = %s\n", line);
-//	   ////free(line);
 //		   printf("******* GNT1 ********\n");
 //		   printf("GNT1 - main - Ligne = %s", get_next_line(fd));
 //	   // printf("******* GNT2 ********\n");

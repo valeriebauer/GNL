@@ -6,7 +6,7 @@
 /*   By: vbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:52:25 by vbauer            #+#    #+#             */
-/*   Updated: 2022/01/14 19:21:23 by vbauer           ###   ########.fr       */
+/*   Updated: 2022/01/17 15:51:20 by vbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,9 @@ char	*get_next_line(int fd)
 	static char	*save[1024];
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE <= 0) || fd > 1024)
+	if ((fd < 0) || (BUFFER_SIZE <= 0) || (read(fd, NULL, 0) == -1))
 		return (NULL);
 	save[fd] = ft_read(fd, save[fd]);
-	if (save[fd] == NULL)
-		return (NULL);
 	if (save[fd][0] == '\0')
 	{
 		free(save[fd]);
@@ -103,24 +101,24 @@ char	*get_next_line(int fd)
 	save[fd] = ft_after__n(save[fd]);
 	return (line);
 }
-/*
-int	main(void)
-{
-	int fd;
-	int fd1;
 
-	fd = open("text.txt", O_RDONLY);
-	fd1 = open("text2.txt", O_RDONLY);
+// int	main(void)
+// {
+// 	int fd;
+// 	int fd1;
 
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd1));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd1));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd1));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd1));
+// 	fd = open("text.txt", O_RDONLY);
+// 	fd1 = open("text2.txt", O_RDONLY);
 
-	return (0);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd1));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd1));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd1));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd1));
 
-}*/
+// 	return (0);
+
+// }

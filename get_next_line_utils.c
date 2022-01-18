@@ -48,24 +48,22 @@ int	ft_find_n(char *s)
 	i = 0;
 	if (s == NULL)
 		return (0);
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (1);
+	while ((s[i] != '\0') && (s[i] != '\n'))
 		i++;
-	}
+	if (s[i] == '\n')
+		return (1);
 	return (0);
 }
 
 char	*ft_first_read(void)
 {
-	char	*dest;
+	char	*d;
 
-	dest = (char *)malloc(sizeof(char) * 1);
-	if (dest == NULL)
+	d = (char *)malloc(sizeof(char) * 1);
+	if (d == NULL)
 		return (NULL);
-	dest[0] = '\0';
-	return (dest);
+	d[0] = '\0';
+	return (d);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
