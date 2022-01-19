@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_read(int fd, char *save)
+static char	*ft_read(int fd, char *save)
 {
 	int		read_buf;
 	char	*buf;
@@ -36,7 +36,7 @@ char	*ft_read(int fd, char *save)
 	return (save);
 }
 
-char	*ft_before_n(char *save)
+static char	*ft_before_n(char *save)
 {
 	char	*before_n;
 	int		i;
@@ -50,11 +50,11 @@ char	*ft_before_n(char *save)
 		before_n = malloc(sizeof(char) * (i + 1));
 	if (before_n == NULL)
 		return (NULL);
-	before_n = ft_strcpy_n(before_n, save);
+	ft_strcpy_n(before_n, save);
 	return (before_n);
 }
 
-char	*ft_after__n(char *save)
+static char	*ft_after__n(char *save)
 {
 	char	*after_n;
 	int		i;

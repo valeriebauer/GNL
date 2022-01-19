@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_read(int fd, char *save)
+static char	*ft_read(int fd, char *save)
 {
 	int		read_buf;
 	char	*buf;
@@ -36,7 +36,7 @@ char	*ft_read(int fd, char *save)
 	return (save);
 }
 
-char	*ft_before_n(char *save)
+static char	*ft_before_n(char *save)
 {
 	char	*before_n;
 	int		i;
@@ -50,11 +50,11 @@ char	*ft_before_n(char *save)
 		before_n = malloc(sizeof(char) * (i + 1));
 	if (before_n == NULL)
 		return (NULL);
-	before_n = ft_strcpy_n(before_n, save);
+	ft_strcpy_n(before_n, save);
 	return (before_n);
 }
 
-char	*ft_after__n(char *save)
+static char	*ft_after__n(char *save)
 {
 	char	*after_n;
 	int		i;
@@ -104,27 +104,29 @@ char	*get_next_line(int fd)
 
 // int main(void)
 // {
-//	   int fd;
-//	   int i = 0;
-//	   ////char    *line;
+// 	   int fd;
+// 	   int i = 0;
+// 	   char    *line;
 
-//	   fd = open("input.txt", O_RDONLY);
-//	   // if (fd == -1)
-//	   //			  return (1);		 // failed
-//	   while (i++ < 10)
-//	   {
-//		   printf("******* GNT1 ********\n");
-//		   printf("GNT1 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT2 ********\n");
-//	   // printf("GNT2 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT3 ********\n");
-//	   // printf("GNT3 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT4 ********\n");
-//	   // printf("GNT4 - main - Ligne = %s", get_next_line(fd));
-//	   // printf("******* GNT5 ********\n");
-//	   // printf("GNT5 - main - Ligne = %s", get_next_line(fd));
-//	   // if (close(fd) == -1)
-//	   //	  return (1);		 // failed
-//	   }
-//	   return (0);
+// 	   fd = open("text.txt", O_RDONLY);
+// 	   if (fd == -1)
+// 	   			  return (1);		 // failed
+// 	   while (i++ < 10)
+// 	   {
+// 		   printf("******* GNT1 ********\n");
+// 		   line = get_next_line(fd);
+// 		   printf("GNT1 - main - Ligne = %s", line);
+// 	   // printf("******* GNT2 ********\n");
+// 	   // printf("GNT2 - main - Ligne = %s", get_next_line(fd));
+// 	   // printf("******* GNT3 ********\n");
+// 	   // printf("GNT3 - main - Ligne = %s", get_next_line(fd));
+// 	   // printf("******* GNT4 ********\n");
+// 	   // printf("GNT4 - main - Ligne = %s", get_next_line(fd));
+// 	   // printf("******* GNT5 ********\n");
+// 	   // printf("GNT5 - main - Ligne = %s", get_next_line(fd));
+// 	   free(line);
+// 	   }
+// 	   	if (close(fd) == -1)
+// 	   	  return (1);		 // failed
+// 	   return (0);
 // }
